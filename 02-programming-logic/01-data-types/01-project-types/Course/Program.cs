@@ -1,26 +1,29 @@
 ﻿using System;
 
-namespace MyApp {
-    internal class Program {
-        static void Main(string[] args) {
+namespace MyApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
             /*
-            SByte x = 100; // no C# o tipo é o sbyte, mas no .NET é SByte. Nesse caso, depende da importação de System
-            // Os numéricos inteiros mais utilizados são o int / System.Int32 e o long / System.Int64
-            // Os numéricos decimais mais utilizados são o float / System.Single e o double / System.Double
-            // Quando se exigir um decimal com número MUITO grande, utiliza-se o decimal / System.Decimal
-            // Também são muito importantes os bool / System.Boolean
+            SByte x = 100; // in C# the type is sbyte, but in .NET it is SByte. In this case, it depends on importing System
+            // The most commonly used integer numerics are int / System.Int32 and long / System.Int64
+            // The most commonly used decimal numerics are float / System.Single and double / System.Double
+            // When a decimal is required with a VERY large number, decimal is used / System.Decimal
+            // Bool / System.Boolean are also very important
 
             Console.WriteLine(x);
             */
 
-            // Overflow -> Cálcula extrapola o limite da variável
+            // Overflow -> Calculates extrapolates the limit of the variable
             byte n1 = 255;
-            n1++; // nesse caso, o valor da variável "reseta", iniciando pelo menor valor possível. Como no byte é 0
-            // o valor será definido como 0. Se o menor valor fosse -128, ficaria -128
+            n1++; // in this case, the value of the variable "resets", starting with the lowest possible value. As in byte it is 0
+            // the value will be set to 0. If the lowest value was -128, it would be -128
             Console.WriteLine("\nValor de n1: " + n1 + "\n");
 
             int n2 = 1000;
-            int n3 = 2147483647; // maior valor de int
+            int n3 = 2147483647; // highest value of int
             long n4 = 2147483648L;
 
             System.Console.WriteLine(n2);
@@ -43,17 +46,17 @@ namespace MyApp {
             System.Console.WriteLine(nome);
 
 
-            /* Genéricos */
+            /* Generics */
             Object fulano = "Rafael";
             var ciclano = "Jurandir";
 
             System.Console.WriteLine(fulano);
             System.Console.WriteLine(ciclano);
 
-            /* Valores mínimos e máximos */
+            /* Minimum and maximum values */
 
-            // Tipo.MinValue -> retorna o menor valor do tipo
-            // Tipo.MaxValue -> retorna o maior valor do tipo
+            // Type.MinValue -> returns the smallest value of the type
+            // Type.MaxValue -> returns the largest value of the type
 
             int int1 = int.MinValue;
             int int2 = int.MaxValue;
