@@ -1,5 +1,7 @@
 ﻿/* DateTime */
 
+// Represents an Instant
+
 // Returns the current system date and time
 using System.Globalization;
 using System.Runtime.Serialization;
