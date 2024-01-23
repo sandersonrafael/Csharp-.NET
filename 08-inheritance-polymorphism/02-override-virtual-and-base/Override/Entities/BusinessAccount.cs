@@ -1,4 +1,4 @@
-namespace Inheritance.Entities;
+namespace Override.Entities;
 
 public class BusinessAccount : Account
 {
@@ -6,7 +6,8 @@ public class BusinessAccount : Account
 
     public BusinessAccount() { }
 
-    public BusinessAccount(int number, string holder, double balance, double loanLimit) : base(number, holder, balance)
+    public BusinessAccount(int number, string holder, double balance, double loanLimit)
+        : base(number, holder, balance)
     {
         LoanLimit = loanLimit;
     }
