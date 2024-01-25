@@ -1,0 +1,36 @@
+## LINQ - Language Integrated Query ##
+
+
+# It is a set of technologies based on the integration of query functionalities directly into the C# language
+
+-> Operations called directly from collections
+-> Queries are first-class objects
+-> IDE Compiler and IntelliSense Support
+-> Namespace System.LINQ;
+-> It has several query operations, whose parameters are typically lambda expressions or expressions with a syntax similar to SQL
+-> Presents itself through extension methods
+
+
+# Three steps
+
+-> Create a data source(collection, array, E/S resource etc)
+-> Define the query
+-> Execute the query (foreach or some terminal operation)
+
+
+# LINQ Operations (Methods)
+
+-> Filtering: Where (findAll() of JavaScript), OfType
+-> Sorting: OrderBy, OrderByDescending, ThenBy, ThenByDescending, Reverse
+-> Set: Distinct, Except, Intersect, Union
+-> Quantification: All, Any, Contains
+-> Projection: Select, SelectMany
+-> Partition: Skip, Take
+-> Join: Join, GroupJoin
+-> Grouping: GroupBy
+-> Generational: Empty
+-> Equality: SequenceEquals
+-> Element: ElementAt, First, FirstOrDefault, Last, LastOrDefault, Single, SingleOrDefault
+-> Conversions: AsEnumerable, AsQueryable
+-> Concatenation: Concat
+-> Aggregation: Aggregate, Average, Count, LongCount, Max, Min, Sum
