@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ThirdProject.Models.Enums;
 using ThirdProject.Models.Dtos;
+using ThirdProject.Services;
 
 namespace ThirdProject.Controllers;
 
@@ -8,49 +9,54 @@ namespace ThirdProject.Controllers;
 [Route("api/tasks")]
 public class TaskController : ControllerBase
 {
-    private static readonly List<Models.Task> _tasks = [];
+
+    private readonly TaskService _service;
+
+    public TaskController(TaskService service)
+    {
+        _service = service;
+    }
 
     [HttpGet]
-    public IActionResult FindAll() => Ok(_tasks);
+    public async Task<IActionResult> FindAll() => Ok(await _service.FindAll());
 
     [HttpGet("{id}")]
-    public IActionResult FindById(Guid id) => _tasks.Find(t => t.Id == id) != null
-        ? Ok(_tasks.Find(t => t.Id == id))
-        : NotFound();
+    public async Task<IActionResult> FindById(Guid id)
+    {
+        TaskDTO? dtoTask = await _service.FindById(id);
+        if (dtoTask is null) return NotFound();
+        return Ok(dtoTask);
+    }
 
     [HttpPost]
-    public IActionResult Create(TaskDTO dto)
+    public async Task<IActionResult> Create(TaskDTO dto)
     {
-        Models.Task newTask = new(dto.Title, dto.Description, dto.LimitDateTime);
-        _tasks.Add(newTask);
-        return Ok(newTask);
+        TaskDTO? dbDto = await _service.Create(dto);
+        if (dbDto is null) return BadRequest();
+        return Ok(dbDto);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id, TaskDTO dto)
+    public async Task<IActionResult> Update(Guid id, TaskDTO dto)
     {
-        int index = _tasks.FindIndex(task => task.Id == id);
-        if (index == -1) return NotFound();
-        _tasks[index].Title = dto.Title;
-        _tasks[index].Description = dto.Description;
-        _tasks[index].LimitDateTime = dto.LimitDateTime;
-        return Ok(_tasks[index]);
+        TaskDTO? dbDto = await _service.Update(id, dto);
+        if (dbDto is null) return NotFound();
+        return Ok(dbDto);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        if (_tasks.Find(task => task.Id == id) == null) return NotFound();
-        _tasks.RemoveAll(task => task.Id == id);
+        TaskDTO? dbDto = await _service.Delete(id);
+        if (dbDto is null) return NotFound();
         return NoContent();
     }
 
     [HttpPatch("{id}")]
-    public IActionResult UpdateStatus(Guid id, Status status)
+    public async Task<IActionResult> UpdateStatus(Guid id, Status status)
     {
-        int index = _tasks.FindIndex(task => task.Id == id);
-        if (index == -1) return NotFound();
-        _tasks[index].Status = status;
-        return Ok(_tasks[index]);
+        TaskDTO? dbDto = await _service.UpdateStatus(id, status);
+        if (dbDto is null) return NotFound();
+        return Ok(dbDto);
     }
 }
